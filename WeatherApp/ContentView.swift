@@ -2,23 +2,33 @@
 //  ContentView.swift
 //  WeatherApp
 //
-//  Created by Mitravarun Chauhan on 15/07/26.
+//  Created by 2602927 on 13/07/26.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var locationManager = LocationManager()
+    @StateObject private var viewModel = WeatherViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            // Dark background
+            Color.black
+                .ignoresSafeArea()
+            
+            // Weather dashboard
+            WeatherDashboardView(
+                viewModel: viewModel,
+                locationManager: locationManager
+            )
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .preferredColorScheme(.dark)
+    }
 }
